@@ -31,6 +31,7 @@ import com.example.demo.Repository.BillRepository;
 import com.example.demo.Repository.ConnectionTypeRepository;
 import com.example.demo.Repository.ConnectionsRepository;
 import com.example.demo.Repository.ConsumerRepository;
+import com.example.demo.Repository.LoginRepository;
 import com.example.demo.Service.ConnectionTypeService;
 import com.example.demo.entity.ConnectionType;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -62,6 +63,9 @@ public class ConnectionTypeControllerTest {
 	
 	@MockBean
 	private BillRepository billRepository;
+	
+	@MockBean
+	private LoginRepository loginRepository;
 	
 	@MockBean
 	private EntityManagerFactory entityManagerFactory;

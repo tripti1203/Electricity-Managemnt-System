@@ -21,7 +21,7 @@ public class ConsumerImpl implements ConsumerService{
 	@Override
 	public Consumer saveConsumer(Consumer consumer) {
 		if(consumerRepository.existsById(consumer.getId())) {
-			throw new ResourceExistsException("Consumer Id already exists : Duplicate entries not allowed!!");
+			throw new ResourceExistsException("ResourceExistsException : Duplicate entries not allowed, consumer id already present!!");
 		}
 		return consumerRepository.save(consumer);
 	}

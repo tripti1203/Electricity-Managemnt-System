@@ -21,7 +21,7 @@ public class ConnectionsImpl implements ConnectionService{
 	@Override
 	public Connections saveConnection(Connections connections) {
 		if(connectionRepository.existsById(connections.getId())) {
-			throw new ResourceExistsException("Connection Id already exists : Duplicate entries not allowed!!");
+			throw new ResourceExistsException("ResourceExistsException : Duplicate entries not allowed, connection id already present!!");
 		}
 		return connectionRepository.save(connections);
 	}

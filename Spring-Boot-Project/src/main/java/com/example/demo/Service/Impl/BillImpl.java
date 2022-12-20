@@ -32,7 +32,7 @@ public class BillImpl implements BillService {
 	@Override
 	public Bill saveBill(Bill bill) {
 		if(billRepository.existsById(bill.getId())) {
-			throw new ResourceExistsException("Bill Id already exists : Duplicate entries not allowed!!");
+			throw new ResourceExistsException("ResourceExistsException  : Duplicate entries not allowed, bill id already present!!");
 		}
 		return billRepository.save(bill);
 	}

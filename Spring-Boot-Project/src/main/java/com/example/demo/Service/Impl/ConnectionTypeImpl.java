@@ -20,7 +20,7 @@ public class ConnectionTypeImpl implements ConnectionTypeService {
 	@Override
 	public ConnectionType saveConnectionType(ConnectionType type) {
 		if(connectionTypeRepository.existsById(type.getId())) {
-			throw new ResourceExistsException("ConnectionType Id already exists : Duplicate entries not allowed!!");
+			throw new ResourceExistsException("ResourceExistsException : Duplicate entries not allowed, connectionType id already present!!");
 		}
 		return connectionTypeRepository.save(type);
 	}

@@ -22,7 +22,7 @@ public class AddressImpl implements AddressService{
 	@Override
 	public Address saveAddress(Address address) {
 		if(addressRepository.existsById(address.getId())) {
-			throw new ResourceExistsException("Address Id already exists : Duplicate entries not allowed!!");
+			throw new ResourceExistsException("ResourceExistsException  : Duplicate entries not allowed, address id already present!!");
 		}
 		return addressRepository.save(address);
 	}

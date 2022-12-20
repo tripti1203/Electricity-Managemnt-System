@@ -4,7 +4,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.nio.file.Files;
@@ -13,7 +12,6 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
 import org.junit.jupiter.api.Test;
@@ -32,15 +30,15 @@ import com.example.demo.Repository.ConnectionTypeRepository;
 import com.example.demo.Repository.ConnectionsRepository;
 import com.example.demo.Repository.ConsumerRepository;
 import com.example.demo.Repository.LoginRepository;
-import com.example.demo.Service.AddressService;
-import com.example.demo.entity.Address;
+import com.example.demo.Service.LoginService;
+import com.example.demo.entity.Login;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @ExtendWith( SpringExtension.class)
-@WebMvcTest(AddressController.class)
-public class AddressControllerTest {
-	
+@WebMvcTest(LoginController.class)
+public class LoginControllerTest {
+
 	@Autowired
 	private MockMvc mockMvc;
 	
@@ -48,7 +46,7 @@ public class AddressControllerTest {
 	private ObjectMapper objectMapper;
 	
 	@MockBean
-	private AddressService addressService;
+	private LoginService loginService;
 	
 	@MockBean
 	private AddressRepository addressRepository;
@@ -72,33 +70,30 @@ public class AddressControllerTest {
 	private EntityManagerFactory entityManagerFactory;
 
 	@Test
-	public void testGetAllAddress() throws Exception{
-		List<Address> listAddress = new ArrayList<Address>();
-		listAddress.add(new Address(1,"New Town","Kolkata"));
-		listAddress.add(new Address(2,"Park Street","Kolkata"));
-		listAddress.add(new Address(3,"Jagatdal","Kolkata"));
-		listAddress.add(new Address(4,"Barrackpore","Kolkata"));
-		listAddress.add(new Address(5,"Naihati","Kolkata"));
-		Mockito.when(addressService.getAll()).thenReturn(listAddress);
-		MvcResult mvcGetResult = mockMvc.perform(get("/address")).andExpect(status().isOk()).andReturn();
+	public void testGetAllLogin() throws Exception{
+		List<Login> listLogin = new ArrayList<Login>();
+		listLogin.add(new Login("Admin","Password"));
+		Mockito.when(loginService.getAll()).thenReturn(listLogin);
+		MvcResult mvcGetResult = mockMvc.perform(get("/login")).andExpect(status().isOk()).andReturn();
 		byte[] bytes = mvcGetResult.getResponse().getContentAsByteArray();
-		Path path = Paths.get("adddress.xls");
+		Path path = Paths.get("loginList.xls");
 		Files.write(path, bytes);
 	}
 	
 	@Test
-	public void testSaveAddress() throws JsonProcessingException, Exception {
-		Address savedAddress = new Address(6,"Bidhannagar","Kolkata");
-		mockMvc.perform(post("/address")
+	public void testSaveLogin() throws JsonProcessingException, Exception {
+		Login savedLogin = new Login("Admin2","Password2");
+		mockMvc.perform(post("/login")
 				.contentType("application/json")
-				.content(objectMapper.writeValueAsString(savedAddress)
+				.content(objectMapper.writeValueAsString(savedLogin)
 				)).andExpect(status().isOk())
 				.andDo(print());
 	}
 	
 	@Test
-	public void testDeleteAddressById() throws Exception {
-		mockMvc.perform(delete("/address/{id}", 1))
+	public void testDeleteLogin() throws Exception {
+		String id="Admin";
+		mockMvc.perform(delete("/login/{id}", id))
 		 .andExpect(status().isOk())
 		 .andDo(print());
 	}

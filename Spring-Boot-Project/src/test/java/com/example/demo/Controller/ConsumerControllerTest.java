@@ -31,6 +31,7 @@ import com.example.demo.Repository.BillRepository;
 import com.example.demo.Repository.ConnectionTypeRepository;
 import com.example.demo.Repository.ConnectionsRepository;
 import com.example.demo.Repository.ConsumerRepository;
+import com.example.demo.Repository.LoginRepository;
 import com.example.demo.Service.ConsumerService;
 import com.example.demo.entity.Address;
 import com.example.demo.entity.Consumer;
@@ -63,6 +64,9 @@ public class ConsumerControllerTest {
 	
 	@MockBean
 	private BillRepository billRepository;
+	
+	@MockBean
+	private LoginRepository loginRepository;
 	
 	@MockBean
 	private EntityManagerFactory entityManagerFactory;
