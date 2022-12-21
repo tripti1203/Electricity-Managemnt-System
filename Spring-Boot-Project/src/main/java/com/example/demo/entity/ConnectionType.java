@@ -27,6 +27,7 @@ import lombok.ToString;
 @DynamicUpdate
 public class ConnectionType implements Serializable {
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String type;
 	private double fixedCharge;

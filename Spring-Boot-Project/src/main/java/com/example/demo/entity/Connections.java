@@ -31,6 +31,7 @@ import lombok.ToString;
 @DynamicUpdate
 public class Connections implements Serializable{
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
 	@ManyToOne(fetch=FetchType.LAZY)

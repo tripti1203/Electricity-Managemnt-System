@@ -45,7 +45,7 @@ import lombok.ToString;
 @DynamicUpdate
 public class Bill implements Serializable {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
